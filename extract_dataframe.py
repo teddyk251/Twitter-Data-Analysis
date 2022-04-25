@@ -35,7 +35,7 @@ class TweetDfExtractor:
 
     # an example function
     def find_statuses_count(self)->list:
-        statuses_count = [x['user']['statuses_count'] for x in self.tweets_list]
+        statuses_count = [tweet['user']['statuses_count'] for tweet in self.tweets_list]
         
         return statuses_count
         
@@ -53,33 +53,33 @@ class TweetDfExtractor:
         return polarity, self.subjectivity
 
     def find_created_time(self)->list:
-        created_at = [x['created_at'] for x in self.tweets_list]
+        created_at = [tweet['created_at'] for tweet in self.tweets_list]
        
         return created_at
 
     def find_source(self)->list:
-        source = 
+        source = [tweet['source'] for tweet in self.tweets_list]
 
         return source
 
     def find_screen_name(self)->list:
-        screen_name = [x['user']['screen_name'] for x in self.tweets_list]
+        screen_name = [tweet['user']['screen_name'] for tweet in self.tweets_list]
         
         return screen_name
 
     def find_followers_count(self)->list:
-        followers_count = [x['user']['followers_count'] for x in self.tweets_list]
+        followers_count = [tweet['user']['followers_count'] for tweet in self.tweets_list]
         
         return followers_count
 
     def find_friends_count(self)->list:
-        friends_count = [x['user']['friends_count'] for x in self.tweets_list]
+        friends_count = [tweet['user']['friends_count'] for tweet in self.tweets_list]
         
         return friends_count
 
     def is_sensitive(self)->list:
         try:
-            is_sensitive = [x['possibly_sensitive'] for x in self.tweets_list]
+            is_sensitive = [tweet['possibly_sensitive'] for tweet in self.tweets_list]
         except KeyError:
             is_sensitive = None
 
@@ -89,7 +89,7 @@ class TweetDfExtractor:
             
     
     def find_retweet_count(self)->list:
-        retweet_count = [x['retweet_count'] for x in self.tweets_list]
+        retweet_count = [tweet['retweet_count'] for tweet in self.tweets_list]
         
         return retweet_count
 
