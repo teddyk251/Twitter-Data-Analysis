@@ -35,17 +35,25 @@ class TweetDfExtractor:
 
     # an example function
     def find_statuses_count(self)->list:
-        statuses_count 
+        statuses_count = [x['user']['statuses_count'] for x in self.tweets_list]
+        
+        return statuses_count
         
     def find_full_text(self)->list:
         text = 
        
     
     def find_sentiments(self, text)->list:
+        polarity, subjectivity = [], []
+        for tweet in text:
+            blob = TextBlob(text)
+            polarity.append(blob.sentiment.polarity)
+            subjectivity.append(blob.sentiment.subjectivity)
         
         return polarity, self.subjectivity
 
     def find_created_time(self)->list:
+        created_at = [x['created_at'] for x in self.tweets_list]
        
         return created_at
 
@@ -55,13 +63,19 @@ class TweetDfExtractor:
         return source
 
     def find_screen_name(self)->list:
-        screen_name = 
+        screen_name = [x['user']['screen_name'] for x in self.tweets_list]
+        
+        return screen_name
 
     def find_followers_count(self)->list:
-        followers_count = 
+        followers_count = [x['user']['followers_count'] for x in self.tweets_list]
+        
+        return followers_count
 
     def find_friends_count(self)->list:
-        friends_count = 
+        friends_count = [x['user']['friends_count'] for x in self.tweets_list]
+        
+        return friends_count
 
     def is_sensitive(self)->list:
         try:
@@ -72,16 +86,23 @@ class TweetDfExtractor:
         return is_sensitive
 
     def find_favourite_count(self)->list:
-        
+            
     
     def find_retweet_count(self)->list:
-        retweet_count = 
+        retweet_count = [x['retweet_count'] for x in self.tweets_list]
+        
+        return retweet_count
 
     def find_hashtags(self)->list:
-        hashtags =
+        hashtags = [tweet.get('entities', {}).get('hashtags', None) for tweet in self.tweets_list]
+        
+        return hashtags
+        
 
     def find_mentions(self)->list:
-        mentions = 
+        mentions = []
+        
+        for twee
 
 
     def find_location(self)->list:
