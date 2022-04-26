@@ -79,10 +79,12 @@ class TweetDfExtractor:
         return friends_count
 
     def is_sensitive(self)->list:
-        try:
-            is_sensitive = [tweet['possibly_sensitive'] for tweet in self.tweets_list]
-        except KeyError:
-            is_sensitive = None
+        is_sensitive = []
+        for tweet in self.tweets_list:
+            try:
+                is_sensitive.append(tweet['possibly_sensitive'])
+            except KeyError:
+                is_sensitive.append(None)
 
         return is_sensitive
 
@@ -98,7 +100,11 @@ class TweetDfExtractor:
         return retweet_count
 
     def find_hashtags(self)->list:
-        hashtags = [tweet.get('entities', {}).get('hashtags', None) for tweet in self.tweets_list]
+        # hashtags = [tweet.get('entities', {}).get('hashtags', []) for tweet in self.tweets_list]
+        hashtags = []
+        for tweet in self.tweets_list:
+            hashtags.append(", ".join([hashtag_item['text'] for hashtag_item in tweet['entities']['hashtags']]))
+
         
         return hashtags
         
@@ -112,12 +118,16 @@ class TweetDfExtractor:
 
 
     def find_location(self)->list:
-        try:
-            location = self.tweets_list['user']['location']
-        except TypeError:
-            location = ''
+        locations = []
+        for tweet in self.tweets_list:
+            try:
+                location = tweet['user']['location']
+                locations.append(location)
+            except TypeError:
+                location = ''
+                locations.append(location)
         
-        return location
+        return locations
 
     
     def find_lang(self)->list:
