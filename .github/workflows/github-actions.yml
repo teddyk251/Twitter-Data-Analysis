@@ -1,8 +1,0 @@
-name: GitHub Actions
-on: [push]
-jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
-    steps:
-      - run: pip install -r requirements.txt
-      - run: python -m unittest tests.test_extract_dataframe
