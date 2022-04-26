@@ -40,8 +40,9 @@ class TweetDfExtractor:
         return statuses_count
         
     def find_full_text(self)->list:
-        text = 
-       
+        text = [tweet['data'] for tweet in self.tweets_list]
+
+        return text       
     
     def find_sentiments(self, text)->list:
         polarity, subjectivity = [], []
@@ -86,6 +87,9 @@ class TweetDfExtractor:
         return is_sensitive
 
     def find_favourite_count(self)->list:
+        favourite_count = [tweet['retweet_count'] for tweet in self.tweets_list]
+
+        return favourite_count
             
     
     def find_retweet_count(self)->list:
@@ -100,9 +104,9 @@ class TweetDfExtractor:
         
 
     def find_mentions(self)->list:
-        mentions = []
+        mentions = [[mentions.append(", ".join([mention['screen_name'] for tweet in self.tweets_list for mention in tweet.get('entities',{}).get('user_mentions',None)])) ]]
         
-        for twee
+        return mentions
 
 
     def find_location(self)->list:
