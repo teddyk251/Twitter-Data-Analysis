@@ -40,18 +40,18 @@ class TweetDfExtractor:
         return statuses_count
         
     def find_full_text(self)->list:
-        text = [tweet['data'] for tweet in self.tweets_list]
+        text = [tweet['text'] for tweet in self.tweets_list]
 
         return text       
     
     def find_sentiments(self, text)->list:
         polarity, subjectivity = [], []
         for tweet in text:
-            blob = TextBlob(text)
+            blob = TextBlob(tweet)
             polarity.append(blob.sentiment.polarity)
             subjectivity.append(blob.sentiment.subjectivity)
         
-        return polarity, self.subjectivity
+        return polarity, subjectivity
 
     def find_created_time(self)->list:
         created_at = [tweet['created_at'] for tweet in self.tweets_list]
@@ -104,7 +104,9 @@ class TweetDfExtractor:
         
 
     def find_mentions(self)->list:
-        mentions = [[mentions.append(", ".join([mention['screen_name'] for tweet in self.tweets_list for mention in tweet.get('entities',{}).get('user_mentions',None)])) ]]
+        mentions = []
+        for tw in self.tweets_list:
+            mentions.append( ", ".join([mention['screen_name'] for mention in tw['entities']['user_mentions']]))
         
         return mentions
 
@@ -116,6 +118,12 @@ class TweetDfExtractor:
             location = ''
         
         return location
+
+    
+    def find_lang(self)->list:
+        lang = [tweet['lang'] for tweet in self.tweets_list]
+
+        return lang
 
     
         
@@ -154,7 +162,7 @@ if __name__ == "__main__":
     # required column to be generated you should be creative and add more features
     columns = ['created_at', 'source', 'original_text','clean_text', 'sentiment','polarity','subjectivity', 'lang', 'favorite_count', 'retweet_count', 
     'original_author', 'screen_count', 'followers_count','friends_count','possibly_sensitive', 'hashtags', 'user_mentions', 'place', 'place_coord_boundaries']
-    _, tweet_list = read_json("../covid19.json")
+    _, tweet_list = read_json("./data/Economic_Twitter_Data.json")
     tweet = TweetDfExtractor(tweet_list)
     tweet_df = tweet.get_tweet_df() 
 
