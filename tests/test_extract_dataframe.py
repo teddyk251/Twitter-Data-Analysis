@@ -41,41 +41,48 @@ class TestTweetDfExtractor(unittest.TestCase):
         self.assertEqual(self.df.find_sentiments(self.df.find_full_text()), ([0.16666666666666666, 0.13333333333333333, 0.3166666666666667, 0.08611111111111111, 0.27999999999999997], [0.18888888888888888, 0.45555555555555555, 0.48333333333333334, 0.19722222222222224, 0.6199999999999999]))
 
     def test_find_created_time(self):
-        created_at = ['Fri Jun 18 17:55:49 +0000 2021', 'Fri Jun 18 17:55:59 +0000 2021', 'Fri Jun 18 17:56:07 +0000 2021',
-         'Fri Jun 18 17:56:10 +0000 2021', 'Fri Jun 18 17:56:20 +0000 2021']
+        #Done
+        created_at = ['Fri Apr 22 22:20:18 +0000 2022', 'Fri Apr 22 22:19:16 +0000 2022', 'Fri Apr 22 22:17:28 +0000 2022',
+         'Fri Apr 22 22:17:20 +0000 2022', 'Fri Apr 22 22:13:15 +0000 2022']
 
         self.assertEqual(self.df.find_created_time(), created_at)
 
     def test_find_source(self):
-        source = ['<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>', '<a href="https://mobile.twitter.com" rel="nofollow">Twitter Web App</a>', 
-        '<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>', '<a href="https://mobile.twitter.com" rel="nofollow">Twitter Web App</a>',
+        #Done
+        source = ['<a href="http://twitter.com/download/android" rel="nofollow">Twitter for Android</a>', '<a href="http://twitter.com/download/android" rel="nofollow">Twitter for Android</a>', 
+        '<a href="http://twitter.com/download/android" rel="nofollow">Twitter for Android</a>', '<a href="http://twitter.com/download/android" rel="nofollow">Twitter for Android</a>',
          '<a href="http://twitter.com/download/android" rel="nofollow">Twitter for Android</a>']
 
         self.assertEqual(self.df.find_source(), source)
 
     def test_find_screen_name(self):
-        name = ['ketuesriche', 'Grid1949', 'LeeTomlinson8', 'RIPNY08', 'pash22']
+        #Done
+        name = ['McMc74078966', 'McMc74078966',
+                'McMc74078966', 'McMc74078966', 'McMc74078966']
         self.assertEqual(self.df.find_screen_name(), name)
 
     def test_find_followers_count(self):
-        f_count = [551, 66, 1195, 2666, 28250]
+        #Done        
+        f_count = [3, 3, 3, 3, 3]
         self.assertEqual(self.df.find_followers_count(), f_count)
 
     def test_find_friends_count(self):
-        friends_count = [351, 92, 1176, 2704, 30819]
+        #Done
+        friends_count = [12, 12, 12, 12, 12]
         self.assertEqual(self.df.find_friends_count(), friends_count)
 
     def test_find_is_sensitive(self):
+        #Done
         self.assertEqual(self.df.is_sensitive(), [None, None, None, None, None])
 
     def test_find_favourite_count(self):
-        self.assertEqual(self.df.find_favourite_count(), [548, 195, 2, 1580, 72])
+        self.assertEqual(self.df.find_favourite_count(), [0, 0, 0, 0, 0])
 
     def test_find_retweet_count(self):
         self.assertEqual(self.df.find_retweet_count(), [612, 92, 1, 899, 20])
 
-    # def test_find_hashtags(self):
-    #     self.assertEqual(self.df.find_hashtags(), )
+    def test_find_hashtags(self):
+        self.assertEqual(self.df.find_hashtags(), )
 
     # def test_find_mentions(self):
     #     self.assertEqual(self.df.find_mentions(), )
