@@ -1,6 +1,5 @@
 __pycache__/
 data/*.json
 data/.ipynb_checkpoints/
-notebooks/
 .ipynb_checkpoints/
 data/*.txt
