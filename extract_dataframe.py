@@ -102,6 +102,9 @@ class TweetDfExtractor:
     def find_hashtags(self)->list:
         hashtags = [tweet['entities']['hashtags'] for tweet in self.tweets_list]
         
+        # parse text from hashtag dictionary
+        
+        hashtags = [[tag['text'] for tag in hashtag] if len(hashtag) else [] for hashtag in hashtags ]        
         
         return hashtags
         
