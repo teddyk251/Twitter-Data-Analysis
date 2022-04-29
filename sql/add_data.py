@@ -144,16 +144,14 @@ def insert_to_tweet_table(dbName: str, df: pd.DataFrame, table_name: str) -> Non
     conn, cur = DBConnect(dbName)
 
     df = preprocess_df(df)
+    print('**********',df.shape)
     length = []
     for _, row in df.iterrows():
-        print(row.shape)
-        print(row)
-        length.append(row)
+        # length.append(row)
         sqlQuery = f"""INSERT INTO {table_name} (created_at, source, original_text, polarity, subjectivity, language,
                     favorite_count, retweet_count, original_author, followers_count, friends_count, possibly_sensitive,
-                    hashtags, user_mentions, clean_text)
-             VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
-        data = (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12],  row[14])
+                    hashtags, user_mentions, clean_text) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
+        data = (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14])
 
         try:
             # Execute the SQL command
@@ -164,7 +162,7 @@ def insert_to_tweet_table(dbName: str, df: pd.DataFrame, table_name: str) -> Non
         except Exception as e:
             conn.rollback()
             print("Error: ", e)
-    print(length)
+    # print(length)
     return
 
 
@@ -221,11 +219,12 @@ if __name__ == "__main__":
     createTables(dbName='tweets')
 
     processed_tweet_df = pd.read_csv('../data/cleaned_tweet_data.csv')
-    print(processed_tweet_df.shape)
-    print(processed_tweet_df.columns)
-    processed_tweet_df = preprocess_df(processed_tweet_df)
-    print(processed_tweet_df.shape)
-    print(processed_tweet_df.columns)
+    # print(processed_tweet_df.shape)
+    # print(processed_tweet_df.columns)
+    # processed_tweet_df = preprocess_df(processed_tweet_df)
+    # print(processed_tweet_df.shape)
+    # print(processed_tweet_df.columns)
+    processed_tweet_df = processed_tweet_df.fillna("")
 
     insert_to_tweet_table(dbName='tweets', df=processed_tweet_df,
                           table_name='TweetInformation')
