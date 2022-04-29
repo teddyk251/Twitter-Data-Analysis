@@ -12,3 +12,5 @@ sklearn==0.0
 scipy==1.6.1
 joblib==1.0.1
 scikit-learn==0.24.1
+streamlit
+mysql-connector-python
