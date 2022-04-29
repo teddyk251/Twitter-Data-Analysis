@@ -5,7 +5,6 @@ import mysql.connector
 import pandas as pd
 import numpy as np
 import os
-import plotly.graph_objects as go
 
 
 
